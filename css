@@ -1,0 +1,35 @@
+##浮动
+1. 浮动float: left float:right float:none, 影响紧临的元素
+1. 清除浮动影响，对被浮动影响的元素
+    a. clear:left clear:both
+    b. wdith:100%;overflow:hide
+
+##自动居中
+margin:0 auto
+
+##定位
+posistion 
+    relative  
+        拥有偏移属性和Z-index
+        偏移相对于本来位置, top, left
+        EG: 相对于本来位置偏移(50, 50; 当与元素重合时，处于上层
+        ```
+        position:relative; top:50px; left:50px;  
+        ```
+    absolute
+        脱离标准文档流
+        无已经定位的祖先元素(有position属性），以Html为偏移对象
+        有已经定位的祖先元素， 以最近的祖先元素偏移
+    fixed
+    static
+
+#切图工具
+http://www.cutterman.cn/
+http://www.cutandslice.me/
+
+1. 把生命浪费在美好的事物上
+2. 应该有一份不以此为生的职业
+3. 30岁以下最著名的男士
+4. 一切改革都是从违法开始的
+5. 在穷也要站在富人堆里
+6. 生活就是做减法.  活在当下
