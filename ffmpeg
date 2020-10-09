@@ -40,3 +40,16 @@ ffmpeg -ss 00:34:24.85 -t 10 -i path/to/file.mp4 -f mp3 pipe:play | ffplay -i pi
 # generate a signal, and will stream it to the port 1234 on localhost
 ffmpeg -re -f lavfi -i aevalsrc="sin(400*2*PI*t)" -ar 8000 -f mulaw -f rtp rtp://127.0.0.1:1234
 ffplay rtp rtp://127.0.0.1:1234
+
+
+# osx 录制音频
+ffmpeg -f avfoundation -i ":2" test-output.aiff
+
+
+## ffmpeg 拉流roc发送
+ffmpeg -i http://living.muzhifm.com/muzhifm/kmlive2.m3u8\?auth_key\=1632634402-0-0-5d0fcb0b5a596dc01f1544c33eb376ac -f wav - 2>/dev/null| ./roc-send -vv -s rtp+rs8m://192.168.20.119:10001 -r rs8m://192.168.20.119:10002  -i file:- --input-format wav
+ffmpeg -f avfoundation -i ":2" -f wav - 2>/dev/null| ./roc-send -vv -s rtp+rs8m://192.168.20.119:10001 -r rs8m://192.168.20.119:10002  -i file:- --input-format wav
+
+
+## roc 接收
+./roc-recv -vv -s rtp+rs8m:192.168.20.173:10001 -r rs8m:192.168.20.173:10002 -d wav -o - | ffplay -

@@ -1,0 +1,12 @@
+## nvm 安装使用镜像
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
+export NVM_NODEJS_ORG_MIRROR=http://npm.taobao.org/mirrors/node
+
+nvm install 12.18.4
+
+## npm 使用镜像
+NPM_CONFIG_ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/
+
+
+## reference
+https://developer.aliyun.com/mirror/NPM

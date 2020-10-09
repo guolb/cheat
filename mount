@@ -1,0 +1,28 @@
+# To mount / partition as read-write in repair mode:
+mount -o remount,rw /
+
+# To bind mount path to a second location:
+mount --bind <source> <destination>
+
+# To mount Usb disk as user writable:
+mount -o uid=username,gid=usergroup /dev/sdx /mnt/xxx
+
+# To mount a remote NFS directory:
+mount -t nfs <host>:<remote-dir> <local-dir>
+
+# To mount an ISO:
+mount -o loop disk1.iso /mnt/disk
+
+# To mount samba(note install cifs first)
+# sudo apt-get install cifs-utils
+mount -t cifs ${remount_share_folder}  ${local_mount_folder} -o username=${username},password=${password}
+eg. mount -t cifs //192.168.1.1/share /mnt/share -o username=root,password=123456
+
+## mount samba ubuntu mount folder from osx
+sudo mount -t cifs //192.168.20.122/irtc-electron release -o user=ted,,nounix,sec=ntlmssp
+
+## mount with user group info.
+sudo mount -t cifs //192.168.20.119/irtc ubuntu_ted -o user=ted,uid=1001,gid=1001,rw
+
+## mount in osx share from ubunut.
+mount_smbfs //ted@192.168.20.119/irtc ubuntu_ted
