@@ -53,3 +53,25 @@ ffmpeg -f avfoundation -i ":2" -f wav - 2>/dev/null| ./roc-send -vv -s rtp+rs8m:
 
 ## roc 接收
 ./roc-recv -vv -s rtp+rs8m:192.168.20.173:10001 -r rs8m:192.168.20.173:10002 -d wav -o - | ffplay -
+
+
+## 编译安装
+brew tap homebrew-ffmpeg/ffmpeg
+brew install homebrew-ffmpeg/ffmpeg/ffmpeg --with-fdk-aac
+
+https://trac.ffmpeg.org/wiki/CompilationGuide/macOS
+
+
+
+ffmpeg -i 1-1\ 课程导读.mp4 -c:v libvpx-vp9 -crf 30 -b:v 0 -c:a libopus -b:a 96k -metadata title="课程导读" -metadata comment="111" output.webm
+
+## metadata
+#https://wiki.multimedia.cx/index.php/FFmpeg_Metadata
+ffmpeg -i track05.wav \
+   -metadata title="This is the title" \
+   -metadata author="Made by Me" \
+   -metadata copyright="Copyright 2009 Me"
+   -metadata comment="An exercise in Realmedia metadata" \
+   -y track05.rm
+
+

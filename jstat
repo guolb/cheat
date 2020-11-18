@@ -1,0 +1,16 @@
+## 暑促GC和内存汇总，输出100次，每次间隔5秒
+jstat -gcutil pid 5000 100
+
+
+S0     S1     E      O      M     CCS    YGC     YGCT    FGC    FGCT     GCT
+0.00  80.80  53.06  78.32  93.82  82.08    393   10.777    78    4.449   15.225
+
+S0标示Survivor0区占用的百分比
+S1标示Survivor1区占用的百分比
+E: Eden区域占用
+O: 老年代
+M: 元数据区域
+YGC: 年轻代回收次数
+YGCT: 年轻代回收耗时
+FGC: 老年代回收次数
+FGCT: 老年代回收耗时
