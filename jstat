@@ -8,6 +8,7 @@ S0     S1     E      O      M     CCS    YGC     YGCT    FGC    FGCT     GCT
 S0标示Survivor0区占用的百分比
 S1标示Survivor1区占用的百分比
 E: Eden区域占用
+
 O: 老年代
 M: 元数据区域
 YGC: 年轻代回收次数
