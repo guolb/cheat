@@ -1,0 +1,2 @@
+# watch 进程组
+watch 'pstree | grep ddd'

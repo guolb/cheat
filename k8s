@@ -1,0 +1,83 @@
+# 教程
+https://kubernetes.io/zh/docs/home/
+
+
+# 本地运行kube
+https://developer.aliyun.com/article/221687
+
+## for osx
+curl -Lo minikube https://kubernetes.oss-cn-hangzhou.aliyuncs.com/minikube/releases/v1.16.0/minikube-darwin-amd64 && chmod +x minikube && sudo mv minikube /usr/local/bin/
+
+# for linux
+curl -Lo minikube https://kubernetes.oss-cn-hangzhou.aliyuncs.com/minikube/releases/v1.16.0/minikube-linux-amd64 && chmod +x minikube && sudo mv minikube /usr/local/bin/
+
+# start
+minikube start --image-mirror-country cn \
+    --iso-url=https://kubernetes.oss-cn-hangzhou.aliyuncs.com/minikube/iso/minikube-v1.5.0.iso \
+    --registry-mirror=https://cdvb6t21.mirror.aliyuncs.com \
+    --cpus=4 --memory=4096mb
+
+
+minikube dashboard
+
+# stop
+minikube stop
+minikube delete
+
+## 查看
+
+kubectl get pods
+kubectl get pods -o wide
+
+kubectl get services
+kubectl get deployments
+kubectl get nodes
+kubectl get events
+
+kubectl describe pods ${POD_NAME}
+
+
+# ReplicaSet created by the Deployment
+kubectl get rs
+
+## 配置
+kubectl config view
+kubectl config use-context minikube
+
+## 创建
+
+kubectl create deployment --help
+
+kubectl create deployment kubenetes-bootcmp --image=gcr.io/googles-sample/kubernetes-bootcmp:v1
+kubectl create deployment --image=registry.cn-beijing.aliyuncs.com/guolb57/node-demo
+kubectl delete deployment kubenetes-bootcmp
+
+kubectl describe deployments/kubernetes-bootcamp
+
+# scale
+kubectl scale deployments/kubernetes-bootcamp --replicas=4
+# scale down
+kubectl scale deployments/kubernetes-bootcamp --replicas=2
+
+## 显示k8sAPI
+kubectl proxy
+
+curl http://localhost:8001/version
+curl http://localhost:8001
+
+# 通过proxy和app通信
+export POD_NAME=$(kubectl get pods -o go-template --template '{{range .items }} {{.metadata.name}} {{"\n"}} {{end}}')
+curl http://localhost:8001/api/v1/namespaces/default/pods/demo-8569b86bfd-ptjqj/proxy/home/
+
+# expose app to public
+
+kubectl expose deployment/demo --type="NodePort" --port 8080
+
+# 获取Nodeport port
+export NODE_PORT=$(kubectl get services/kubernetes-bootcamp -o go-template='{{(index .spec.ports 0).nodePort}}')
+curl $(minikube ip):$NODE_PORT
+
+## ingress
+https://kubernetes.io/zh/docs/tasks/access-application-cluster/ingress-minikube/
+https://www.servicemesher.com/blog/kubernetes-ingress-controller-deployment-and-ha/
+https://docs.jdcloud.com/cn/jcs-for-kubernetes/deploy-ingress-nginx-controller

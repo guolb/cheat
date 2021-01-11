@@ -1,0 +1,124 @@
+---
+tags: [ database ]
+---
+# To connect to a database:
+mysql -h <host> -u <username> -p
+
+# To backup all databases:
+mysqldump --all-databases --all-routines -u <username> -p > ~/dump.sql
+
+# To restore all databases:
+mysql -u <username> -p  < ~/fulldump.sql
+
+# To create a database in utf8 charset:
+CREATE DATABASE owa CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+# To add a user and give rights on the given database:
+GRANT ALL PRIVILEGES ON database.* TO 'user'@'localhost'IDENTIFIED BY 'password' WITH GRANT OPTION;
+
+# To list the privileges granted to the account that you are using to connect to the server. Any of the 3 statements will work. :
+SHOW GRANTS FOR CURRENT_USER();
+SHOW GRANTS;
+SHOW GRANTS FOR CURRENT_USER;
+
+# Basic SELECT Statement:
+SELECT * FROM tbl_name;
+
+# Basic INSERT Statement:
+INSERT INTO tbl_name (col1,col2) VALUES(15,col1*2);
+
+# Basic UPDATE Statement:
+UPDATE tbl_name SET col1 = "example";
+
+# Basic DELETE Statement:
+DELETE FROM tbl_name WHERE user = 'jcole';
+
+# To check stored procedure:
+SHOW PROCEDURE STATUS;
+
+# To check stored function:
+SHOW FUNCTION STATUS;
+
+
+# login
+mysql -uroot -hlocalhost -p
+
+#2. 查看所用的用户授
+select user, host from mysql.user;
+
+#. 授权用户 grant
+# 授权用户user从192.168.2.113访问所有的数据库
+grant all on  *.* to user2@192.168.2.113 identified by "mypass"
+# 授权user重192.168.10.2访问，仅用于备份
+grant replication slave on *.* to user@192.168.10.2 identified by "pass";
+
+# 注意：主从服务器的server_id 不能相同
+ #查看主从设置结果：
+ show slave status；
+ #or
+ show processlist;
+
+# 开启log_bin
+/etc/mysql/my.cnf
+log_bin = /var/log/mysql/mysql-bin.log
+show variables like "%log_bin%"
+
+# 备份test数据库, -l 为锁， －F == flash logs 刷新
+mysqldump -uroot -pmypass test -l -F 'dump.sql'
+mysqldump -uroot -pmypass test -l -F > dump.sql
+
+# 恢复数据库, -f 强制执行，出现错误, 跳过继续执行
+mysqldump -uroot -pmypass test -v -f < dump.sql;
+
+mysqlbinlog --no-defaults mysql-bin.0001 | mysql -uroot -pmypass ;
+--stop-position="100"
+--start-position="50"
+--stop-date="2012-01-04 21:17:50"
+--start-date="2012-01-04 19:10:10"
+mysqlbinlog --no-defaults --stop-position="644" mysql-bin.000004|mysql -uroot -pmypass tablename
+
+# show plugin
+
+## insert
+insert into t1 values(2);
+insert into t1 from select * from t1;
+
+ watch -n1 ls -lh
+
+## select
+select count(*) from t1;
+
+# procedure
+# 将语句结束标识；改为//
+# 创建存储
+\d // ##将语句结束标志改为//
+create procedure p3()
+begin
+    set @i=0;
+    while @i <= 3000 do
+        insert into t3 values(@i);
+        set @i = @i+1;
+    end while
+end //
+\d ;
+
+# 查看 存储过程
+show procedure status;
+
+## invoke procedure
+call p3();
+
+#查看创建表的语句
+show create table t1;
+
+# 创建索引
+create index idx_of_c3 on no_part_tab (c3);
+create index idx_of_c3 on part_tab (c3);
+
+## innodb 分为共享表空间和独立表空间，再my.cnf中设置为独立表空间才能实现分区
+innodb_file_per_table
+
+#. 更改表，数据库字符集
+Show create table tablename;
+alter database maildb default character set utf8; #修改数据库的字符集
+alter table mailtable default character set utf8; #修改表的字符集

@@ -1,0 +1,68 @@
+# install 
+sudo apt-get install sysstat
+
+# all tools in sysstat
+ref: https://www.thegeekstuff.com/2011/03/sar-examples/
+
+sar collects and displays ALL system activities statistics.
+sadc stands for “system activity data collector”. This is the sar backend tool that does the data collection.
+sa1 stores system activities in binary data file. sa1 depends on sadc for this purpose. sa1 runs from cron.
+sa2 creates daily summary of the collected statistics. sa2 runs from cron.
+sadf can generate sar report in CSV, XML, and various other formats. Use this to integrate sar data with other tools.
+
+iostat generates CPU, I/O statistics
+mpstat displays CPU statistics.
+pidstat reports statistics based on the process id (PID)
+nfsiostat displays NFS I/O statistics.
+cifsiostat generates CIFS statistics.
+
+# Collect the sar statistics using cron job – sa1 and sa2
+
+vi /etc/cron.d/sysstat
+*/10 * * * * root /usr/local/lib/sa/sa1 1 1
+53 23 * * * root /usr/local/lib/sa/sa2 -A
+
+# CPU usatge of ALL CPUs
+sar -u 1 3 # report for every 1 seconds a total of 3 times
+sar -u
+sar -u ALL # same as 'sar -u' but display additional fields.
+sar -u ALL 3
+sar -u -f /var/log/sa/sa10
+
+# CPU Usage of indivudal CPU
+sar -P ALL 1 3 # all cpu cores
+sar -P 1 3 1 # for 2nd core
+
+# Memory Free and Used
+sar -r 1 3
+sar -r -f /var/log/sa/sa10
+
+# swap space used 
+sar -S 1 3
+sar -R # identify number of memory pages freed, used, and cached per second by the system.
+sar -H 
+
+# Overall I/O activities (sar -b)
+sar -b 1 3
+
+#  Individual Block Device I/O Activities (sar -d)
+sar -d 1 1
+sar -p -d 3 1  # p for perty print
+
+# display context switch per second
+sar -w
+sar -w 1 3
+
+# report run queue and load avaerage
+sar -q
+sar -1 1 3
+
+# report network statistics
+sar -n DEV
+sar -n SOCK
+sar -n IP
+sar -n EIP
+sar -n ALL 1 1
+
+# report sar data using start time
+sar -q -f /var/log/sa/sa23 -s 10:00:01

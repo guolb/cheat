@@ -1,0 +1,15 @@
+https://kubernetes.io/zh/docs/home/
+
+# 本地运行kube
+
+## https://developer.aliyun.com/article/221687
+brew install minikube
+curl -Lo minikube https://kubernetes.oss-cn-hangzhou.aliyuncs.com/minikube/releases/v1.16.0/minikube-darwin-amd64 && chmod +x minikube && sudo mv minikube /usr/local/bin/
+
+# for linux
+curl -Lo minikube https://kubernetes.oss-cn-hangzhou.aliyuncs.com/minikube/releases/v1.16.0/minikube-linux-amd64 && chmod +x minikube && sudo mv minikube /usr/local/bin/
+
+minikube start --image-mirror-country cn \
+    --iso-url=https://kubernetes.oss-cn-hangzhou.aliyuncs.com/minikube/iso/minikube-v1.5.0.iso \
+    --registry-mirror=https://cdvb6t21.mirror.aliyuncs.com \
+    --cpus=4 --memory=4096mb

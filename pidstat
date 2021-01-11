@@ -1,0 +1,50 @@
+# 显示所有进程CPU状况
+pidstat -u -p ALL
+
+PID：进程ID
+%usr：进程在用户空间占用cpu的百分比
+%system：进程在内核空间占用cpu的百分比
+%guest：进程在虚拟机占用cpu的百分比
+%CPU：进程占用cpu的百分比
+CPU：处理进程的cpu编号
+Command：当前进程对应的命令
+
+## 内存使用情况
+pidstat -r
+
+PID：进程标识符
+Minflt/s:任务每秒发生的次要错误，不需要从磁盘中加载页
+Majflt/s:任务每秒发生的主要错误，需要从磁盘中加载页
+VSZ：虚拟地址大小，虚拟内存的使用KB
+RSS：常驻集合大小，非交换区五里内存使用KB
+Command：task命令名
+
+## 进程IO使用情况
+pidstat -d
+
+PID：进程id
+kB_rd/s：每秒从磁盘读取的KB
+kB_wr/s：每秒写入磁盘KB
+kB_ccwr/s：任务取消的写入磁盘的KB。当任务截断脏的pagecache的时候会发生。
+COMMAND:task的命令名
+
+## 进程上下文
+pidstat -w -p 2831
+
+PID:进程id
+Cswch/s:每秒主动任务上下文切换数量
+Nvcswch/s:每秒被动任务上下文切换数量
+Command:命令名
+
+## 显示选择任务的线程的统计信息外的额外信息
+
+pidstat -t -p 2831
+
+TGID:主线程的表示
+TID:线程id
+%usr：进程在用户空间占用cpu的百分比
+%system：进程在内核空间占用cpu的百分比
+%guest：进程在虚拟机占用cpu的百分比
+%CPU：进程占用cpu的百分比
+CPU：处理进程的cpu编号
+Command：当前进程对应的命令

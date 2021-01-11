@@ -1,0 +1,55 @@
+---
+tags [ networking ]
+---
+
+# a. 列出所有的TCP UDP连接
+    netstat -a | more
+
+# b. 列出TCP连接
+    netstat -at
+
+# c. 列出UDP连接
+    netstat -au
+
+# d. 列出所有监听端口
+    netstat -l
+
+# e. 列出TCP监听端口
+    netstat -lt
+
+# f. 列出UDP监听端口
+    netstat -lu
+
+# g. 列出UNIX监听端口
+    netstat -lx
+
+# h. 显示各种协议的统计
+    netstat -s
+    netstat -su
+    netstat -st
+    netstat --statistics --raw
+
+# j. 显示服务名以及pid
+    netstat -tp
+    netstat -ap | grep http
+
+# k. 显示内核IP路由
+    netstat -r
+    route
+
+# m. 显示网络接口传输状态
+    netstat -i
+
+# n. 显示接口状态
+    netstat -ie
+    ifconfig
+
+# o. 显示multicast组信息
+    netstat -g
+
+# p. 连续打印信息
+    netstat -c
+
+# q.显示系统不支持的协议
+    netstat --verbose
+

@@ -49,3 +49,7 @@ docker run -it \
 
 ## support audio in osx
 https://devops.datenkollektiv.de/running-a-docker-soundbox-on-mac.html
+
+## 查看dockerIP
+# 登录到docker查看 /etc/hosts
+docker inspect --format '{{ .NetworkSettings.IPAddress }}' <docker-container-id>

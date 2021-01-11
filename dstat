@@ -1,0 +1,12 @@
+
+# dstat
+dstat
+
+## dstat show cpu
+dstat -c --top-cpu -d --top-bio --top-latency
+
+## dstat oupput to file
+dstat --output /tmp/sampleoutput.csv -cdn
+
+
+

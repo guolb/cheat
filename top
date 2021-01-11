@@ -1,0 +1,39 @@
+# To update every <interval> samples:
+top -i <interval>
+
+# To set the delay between updates to <delay> seconds:
+top -s <delay>
+
+# To set event counting to accumulative mode:
+top -a
+
+# To set event counting to delta mode:
+top -d
+
+# To set event counting to absolute mode:
+top -e
+
+# To not calculate statistics on shared libraries, also known as frameworks:
+top -F
+
+# To calculate statistics on shared libraries, also known as frameworks (default):
+top -f
+
+# To print command line usage information and exit:
+top -h
+
+# To order the display by sorting on <key> in descending order:
+top -o <key>
+
+
+# 常用，c表示显示完整command
+top -H -d 1 -c
+
+# 高亮列及运行进程 z x y
+选择 shift+L/Rarrow 
+
+
+# 排序
+shift+m 内存排序
+shift+p CPU排序
+
